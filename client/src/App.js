@@ -85,7 +85,7 @@ function App() {
   
 
   return (
-    <Router>
+    <Router basename='/'>
       <div className="App">
         <Nav numberOfItems={numberOfItems()} />
         <Route path='/' exact component={Home} />
