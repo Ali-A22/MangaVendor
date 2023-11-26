@@ -25,6 +25,7 @@ function App() {
       .then((data) => setMessage(data.message));
   }, []);
   const [cart, setCart] = useState([]);
+  
 
 
   function addToCart(book) {
@@ -110,6 +111,7 @@ function App() {
         <Route path='/posts' exact component={Form} />
         <Footer />
       </div>
+      <h1>{message}</h1>
     </Router>
   );
 
