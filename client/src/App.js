@@ -16,7 +16,16 @@ import { getPosts } from './actions/posts'
 
 
 function App() {
+
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    fetch("https://mangavendor-server.onrender.com")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message));
+  }, []);
   const [cart, setCart] = useState([]);
+
 
   function addToCart(book) {
     setCart([...cart, { ...book, quantity: 1 }])
@@ -46,45 +55,46 @@ function App() {
     return counter;
   }
 
-  
+
   useEffect(() => {
     console.log(cart)
   }, [cart]);
 
- 
-  
+
+
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  useEffect (() => {
+  useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
 
   <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>
-        <img className={classes.image}  alt="icon" height="60" />
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={7}>
-              <Posts  />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form  />
-            </Grid>
+    <AppBar className={classes.appBar} position="static" color="inherit">
+      <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>
+      <img className={classes.image} alt="icon" height="60" />
+    </AppBar>
+    <Grow in>
+      <Container>
+        <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+          <Grid item xs={12} sm={7}>
+            <Posts />
           </Grid>
-        </Container>
-      </Grow>
-    </Container>
-  
+          <Grid item xs={12} sm={4}>
+            <Form />
+          </Grid>
+        </Grid>
+      </Container>
+    </Grow>
+  </Container>
 
-  
 
-  
+
+
+
 
   return (
+    
     <Router basename='/'>
       <div className="App">
         <Nav numberOfItems={numberOfItems()} />
@@ -96,14 +106,14 @@ function App() {
           render={() => <Bookinfo books={books} addToCart={addToCart} cart={cart} />} />
         <Route path='/cart'
           render={() => <Cart books={books} cart={cart} changeQuantity={changeQuantity} removeItem={removeItem} />} />
-          <Route path= '/posts' exact component={Posts} />
-          <Route path= '/posts' exact component={Form} />
+        <Route path='/posts' exact component={Posts} />
+        <Route path='/posts' exact component={Form} />
         <Footer />
       </div>
     </Router>
   );
 
-  
+
 }
 
 
