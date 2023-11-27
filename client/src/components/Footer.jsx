@@ -16,7 +16,6 @@ const Footer = () => {
                         <Link to='/' className='footer__link'>Home</Link>
                         <span className='footer__link no-cursor'>About</span>
                         <Link to='/manga' className='footer__link'>Manga</Link>
-                        <Link to='/posts' className='footer__link'>Posts</Link>
                         <Link to='/cart' className='footer__link'>Cart</Link>
                     </div>
                     <div className='footer__copyright'>Copyright &copy; 2023 MangaVendor</div>

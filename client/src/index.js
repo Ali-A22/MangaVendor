@@ -5,22 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBars, faShoppingCart, faTimes, faBolt, faBookOpen, faTags, faStar, faStarHalfAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 
-import reducers from './reducers'
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 
 library.add( faBars, faShoppingCart, faTimes, faBolt, faBookOpen, faTags, faStar, faStarHalfAlt, faArrowLeft )
 
 ReactDOM.render(
   <React.StrictMode>
-  <Provider store={store}>
     <App />
-  </Provider>,
   </React.StrictMode>,
   document.getElementById('root')
 );

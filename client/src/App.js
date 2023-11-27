@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import Footer from './components/Footer';
 import Nav from './components/Nav';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -8,25 +7,12 @@ import Manga from './pages/Manga';
 import { books } from './data';
 import Bookinfo from './pages/BookInfo';
 import Cart from './pages/Cart';
-import Posts from './components/Posts/Posts';
-import Form from './components/Form/Form';
-import useStyles from './styles';
-import { useDispatch } from 'react-redux';
-import { getPosts } from './actions/posts'
 
 
 function App() {
 
-  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    fetch("https://mangavendor-server.onrender.com")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-  
   const [cart, setCart] = useState([]);
-  
 
 
   function addToCart(book) {
@@ -64,39 +50,8 @@ function App() {
 
 
 
-  const dispatch = useDispatch();
-  const classes = useStyles();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
-
-  <Container maxWidth="lg">
-    <AppBar className={classes.appBar} position="static" color="inherit">
-      <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>
-      <img className={classes.image} alt="icon" height="60" />
-    </AppBar>
-    <Grow in>
-      <Container>
-        <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-          <Grid item xs={12} sm={7}>
-            <Posts />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Form />
-          </Grid>
-        </Grid>
-      </Container>
-    </Grow>
-  </Container>
-
-
-
-
-
-
   return (
-    
+
     <Router basename='/'>
       <div className="App">
         <Nav numberOfItems={numberOfItems()} />
@@ -108,11 +63,8 @@ function App() {
           render={() => <Bookinfo books={books} addToCart={addToCart} cart={cart} />} />
         <Route path='/cart'
           render={() => <Cart books={books} cart={cart} changeQuantity={changeQuantity} removeItem={removeItem} />} />
-        <Route path='/posts' exact component={Posts} />
-        <Route path='/posts' exact component={Form} />
         <Footer />
       </div>
-      <h1>{message}</h1>
     </Router>
   );
 
