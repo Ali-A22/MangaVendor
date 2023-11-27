@@ -24,6 +24,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   }, []);
+  
   const [cart, setCart] = useState([]);
   
 
